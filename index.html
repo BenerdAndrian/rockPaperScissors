@@ -7,15 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>RPS Game</h1>
+    <div id="rps">
+        <h1>RPS Game</h1>
 
-    <div>
-        <p id="round">Round: <span>0</span></p>
-        <p id="scoreRound">Player <span>0</span>:<span>0</span> Computer</p>
+        <div>
+            <p id="round">Round: <span>0</span></p>
+            
+        </div>
+        <div>
+            <p id="scoreRound">Player <span>0</span>:<span>0</span> Computer</p>
+            <div id="matchGame">
+               
+               <img alt="choice from player" src="" style="height:150px;width:170px;">
+               <img alt="VS" src="res/images.png" style="width:180px;height:180px;margin-left:-4rem;">
+               <img alt="choice from computer" src="" style="height:150px;width:170pxpx;">
+            </div>
+        </div>
+        
+        <div id="imgChoiceList">
+            <img class="button" src="res/rock.jpg" onclick="pickAChoose('rock')">
+            <img class="button" src="res/paper.jpg" onclick="pickAChoose('paper')">
+            <img class="button" src="res/scissors.jpg" onclick="pickAChoose('scissors')">
+        </div>
+        
+        <button class="replayButton">REPLAY</button>
     </div>
-    <button class="button" onclick="pickAChoose('rock')">ROCK</button>
-    <button class="button" onclick="pickAChoose('paper')">PAPER</button>
-    <button class="button" onclick="pickAChoose('scissors')">SCISSORS</button>
+    
     <script src="RPSgame.js"></script>
 </body>
 </html>

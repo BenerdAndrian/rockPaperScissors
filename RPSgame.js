@@ -1,9 +1,13 @@
 let humanScore=0;
 let computerScore=0;
+let round=0;
 const scoreDisplayUI=document.querySelector("#scoreRound");
 const buttonUI=document.querySelectorAll(".button");
 const roundNumberDisplayUI=document.querySelector("#round");
-
+const message=document.createElement("p");
+message.setAttribute("id","message");
+const body=document.querySelector("#rps");
+const battle=document.getElementById("matchGame");
 function computerChoice(){
     let computerChoosing=Math.random();
      
@@ -19,54 +23,104 @@ function computerChoice(){
 }
 
 function pickAChoose(humanChoice){
-  const computerChoice=computerChoice();
-  let result='';
-  //Logic
-  if(humanChoice==="rock"){
-    if(computerChoice==="rock"){
-        result="you both tie this round";
-    }else if(computerChoice==="paper"){
-        result="Computer wins this round";
-        computerScore++;
-    }else if(computerChoice==="scissors"){
-        result="you win this round";
-        humanScore++;
+    round++;
+    roundNumberDisplayUI.children[0].textContent= `${round}`;
+  if(round<=5){
+    const computerChoiceOption=computerChoice();
+    let result='';
+    //Logic
+    if(humanChoice==="rock"){
+      if(computerChoiceOption==="rock"){
+          result="you both tie this round";
+      }else if(computerChoiceOption==="paper"){
+          result="Computer wins this round";
+          computerScore++;
+      }else if(computerChoiceOption==="scissors"){
+          result="you win this round";
+          humanScore++;
+      }
+    }
+    else if(humanChoice==="paper"){
+      if(computerChoiceOption==="rock"){
+          result="you win this round";
+          humanScore++;
+      }else if(computerChoiceOption==="paper"){
+          result="you both tie this round";
+      }else if(computerChoiceOption==="scissors"){
+          result="Computer wins this round";
+          computerScore++;
+      }
+    }
+    else if(humanChoice==="scissors"){
+      if(computerChoiceOption==="rock"){
+          result="Computer wins this round";
+          computerScore++;
+      }else if(computerChoiceOption==="paper"){
+          result="you win this round";
+          humanScore++;
+      }else if(computerChoiceOption==="scissors"){
+          result="you both tie this round";
+      }
+    }
+    battle.children[0].src=`res/${humanChoice}.jpg`;
+    battle.children[2].src=`res/${computerChoiceOption}.jpg`;
+    message.textContent=result;
+    body.insertBefore(message,document.getElementById("imgChoiceList"));
+    scoreDisplayUI.children[0].textContent=humanScore;
+    scoreDisplayUI.children[1].textContent=computerScore;
+    if(round===5){
+        if(humanScore>computerScore){
+            message.textContent+="<br>YOU WIN GAME"
+        }else if(humanScore<computerScore){
+            message.textContent+="<br>COMPUTER WIN GAME"
+        }else{
+            message.textContent+="<br>TIE THIS GAME"
+        }
+      
+        playNewGame();
     }
   }
-  else if(humanChoice==="paper"){
-    if(computerChoice==="rock"){
-        result="you win this round";
-        humanScore++;
-    }else if(computerChoice==="paper"){
-        result="ou both tie this round";
-    }else if(computerChoice==="scissors"){
-        result="Computer wins this round";
-        computerScore++;
-    }
-  }
-  else if(humanChoice==="scissors"){
-    if(computerChoice==="rock"){
-        result="Computer wins this round";
-        computerScore++;
-    }else if(computerChoice==="paper"){
-        result="you win this round";
-        humanScore++;
-    }else if(computerChoice==="scissors"){
-        result="you both tie this round";
-    }
-  }
-  return result;
 }
 
 function playNewGame(){
- const firstChildScore=scoreDisplayUI.children[0];
- const secondChildScore=scoreDisplayUI.children[1];
- const firstChildRoundNumberDisplay=roundNumberDisplayUI.children[0];
- firstChildScore.textContent="0";
- secondChildScore.textContent="0";
- firstChildRoundNumberDisplay.textContent="0";
  buttonUI.forEach(button=>{
-    button.textContent="REPLAY"
+    button.style.opacity="0.6";
+    button.style.cursor="unset";
+    button.onclick=null;
  })
+ replay();
+ }
+ 
+replay();
+function replay(){
+    const firstChildScore=scoreDisplayUI.children[0];
+    const secondChildScore=scoreDisplayUI.children[1];
+    const firstChildRoundNumberDisplay=roundNumberDisplayUI.children[0];
+    const replayButton=document.querySelector(".replayButton");
+    replayButton.addEventListener("click",function(){
+        battle.children[0].src="";
+        battle.children[2].src="";
+        buttonUI.forEach(button=>{
+            button.style.opacity="unset";
+            button.style.cursor="pointer";
+         })
 
+        firstChildScore.textContent="0";
+        secondChildScore.textContent="0";
+        firstChildRoundNumberDisplay.textContent="0";
+        humanScore=0;
+        computerScore=0;
+        round=0;
+        message.textContent="";
+        buttonUI[0].onclick=function(){
+            pickAChoose("rock");
+            }
+            buttonUI[1].onclick=function(){
+            pickAChoose("paper")
+            }
+            buttonUI[2].onclick=function(){
+            pickAChoose("scissors")
+            }   
+     })
+        
 }
