@@ -20,7 +20,7 @@ body{
     border:2px solid black;
     position:absolute;
     padding:2rem;
-    top:50%;
+    top:52%;
     left:50%;
     transform:translate(-50%,-50%);
     width:70vw;
