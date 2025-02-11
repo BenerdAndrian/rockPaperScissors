@@ -23,6 +23,8 @@ function computerChoice(){
 }
 
 function pickAChoose(humanChoice){
+    const div=document.createElement("div");
+    div.setAttribute("class","result");
     round++;
     roundNumberDisplayUI.children[0].textContent= `${round}`;
   if(round<=5){
@@ -70,13 +72,15 @@ function pickAChoose(humanChoice){
     scoreDisplayUI.children[1].textContent=computerScore;
     if(round===5){
         if(humanScore>computerScore){
-            message.textContent+="<br>YOU WIN GAME"
+            div.innerText="YOU WIN THE GAME!!."
         }else if(humanScore<computerScore){
-            message.textContent+="<br>COMPUTER WIN GAME"
+            div.innerText="COMPUTER WINS THE GAME!!."
         }else{
-            message.textContent+="<br>TIE THIS GAME"
+            
+            div.innerText="TIE THIS GAME!!."
+            
         }
-      
+        message.appendChild(div);
         playNewGame();
     }
   }

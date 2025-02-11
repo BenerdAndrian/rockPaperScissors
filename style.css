@@ -7,6 +7,11 @@ html{
     margin:0;
     padding:0;
 }
+body{
+    width:100vw;
+    height:100vh;
+    background:linear-gradient(0,rgb(191, 228, 88),rgb(14, 204, 238));
+}
 .button{
     cursor:pointer;
     /* opacity:0.6; */
@@ -20,6 +25,9 @@ html{
     transform:translate(-50%,-50%);
     width:70vw;
     max-width:1000px;
+    background-color:white;
+    border-radius:2rem;
+   
 }
 #matchGame,#scoreRound{
     display:flex;
@@ -27,6 +35,9 @@ html{
 }
 #scoreRound{
     justify-content:space-between;
+}
+#scoreRound span{
+    font-weight:bold;
 }
 #matchGame{
     justify-content:space-between;
@@ -51,4 +62,8 @@ h1{
     font-size:1.7rem;
     padding:1rem;
     cursor:pointer;
+}
+.result{
+    font-weight:bold;
+
 }
